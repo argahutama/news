@@ -1,0 +1,12 @@
+rootProject.name = "News App"
+include ':app'
+include ':data'
+include ':feature'
+include ':data:local'
+include ':data:model'
+include ':data:remote'
+include ':data:repository'
+include ':feature:home'
+include ':feature:detail'
+include ':common'
+include ':testutil'

@@ -1,0 +1,13 @@
+plugins {
+    id 'com.android.library'
+}
+
+apply from: '../../android_common.gradle'
+
+android {}
+
+dependencies {
+    implementation project(Modules.model)
+
+    implementation "com.google.code.gson:gson:${Versions.gson}"
+}

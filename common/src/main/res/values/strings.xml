@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="option_yes">Ya</string>
+    <string name="option_no">Tidak</string>
+    <string name="try_again">Coba lagi</string>
+    <string name="press_back_to_exit">Tekan sekali lagi untuk keluar</string>
+    <string name="server_error_title">Maaf, sistem sedang dalam perbaikan</string>
+    <string name="connection_error_title">Tidak ada koneksi internet</string>
+    <string name="photographer">Photographer:</string>
+    <string name="url">Url:</string>
+</resources>

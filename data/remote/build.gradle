@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+}
+
+apply from: '../../android_common.gradle'
+
+android {}
+
+dependencies {
+    implementation project(Modules.local)
+    implementation project(Modules.model)
+
+    implementation "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${Versions.okthttp_logging}"
+
+    debugImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
+    releaseImplementation "com.ashokvarma.android:gander-no-op:${Versions.gander}"
+}

@@ -1,0 +1,144 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: '../android_common.gradle'
+
+hilt {
+    enableAggregatingTask = true
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.argahutama.awesomeapp"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 5
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'awesome_app_key'
+            keyPassword '#awesomeapp#2021'
+            storeFile file('../awesome_app_keystore.jks')
+            storePassword '#awesomeapp#2021'
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+        }
+
+        debugMinified {
+            matchingFallbacks = ['debug']
+            minifyEnabled true
+            shrinkResources true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    flavorDimensions('tier')
+    productFlavors {
+        develop {
+            applicationIdSuffix '.development'
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "API_KEY", "\"121b2d14ddb0482e9c704e782908fe9d\"")
+            resValue "string", "app_name", "News App Dev"
+            dimension 'tier'
+        }
+
+        staging {
+            applicationIdSuffix '.staging'
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "API_KEY", "\"121b2d14ddb0482e9c704e782908fe9d\"")
+            resValue "string", "app_name", "News App Staging"
+            dimension 'tier'
+        }
+
+        production {
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "API_KEY", "\"121b2d14ddb0482e9c704e782908fe9d\"")
+            resValue "string", "app_name", "News App"
+            dimension 'tier'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+    ndkVersion "22.0.6917172"
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(Modules.common)
+    implementation project(Modules.model)
+    implementation project(Modules.local)
+    implementation project(Modules.remote)
+    implementation project(Modules.repository)
+
+    // Feature Module
+    implementation project(Modules.home)
+
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+    implementation project(path: ':common')
+    implementation project(path: ':common')
+    implementation project(path: ':feature:home')
+    implementation project(path: ':feature:detail')
+    implementation project(path: ':data:remote')
+
+    debugImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
+    debugMinifiedImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
+    releaseImplementation "com.ashokvarma.android:gander-no-op:${Versions.gander}"
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+}
+
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def flavor = "default"
+        if (variant.productFlavors.size() > 0) {
+            flavor = variant.productFlavors.get(0).name
+        }
+        outputFileName = "Awesome_App_${variant.versionName}_${flavor}.apk"
+    }
+}

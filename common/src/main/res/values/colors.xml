@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand Color -->
+    <color name="prussian">#2A4D69</color>
+    <color name="teal">#5CA69F</color>
+    <color name="grey_blue">#54828E</color>
+    <color name="turqoise">#8DD2C9</color>
+    <color name="lime">#CCDB52</color>
+    <color name="dark_cyan">#0478A0</color>
+
+    <!-- UI Color -->
+    <color name="black_pitch">#000000</color>
+    <color name="black_900">#081724</color>
+    <color name="black_800">#132432</color>
+    <color name="black_500">#838B92</color>
+    <color name="grey_500">#D9DBDD</color>
+    <color name="grey_300">#E6E8E9</color>
+    <color name="grey_100">#F6F6F6</color>
+    <color name="ui_red">#DB5A52</color>
+    <color name="red_light">#FF968F</color>
+    <color name="yellow">#F4D419</color>
+    <color name="green">#52DB89</color>
+    <color name="green_light">#ECFFF4</color>
+</resources>

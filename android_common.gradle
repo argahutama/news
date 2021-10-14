@@ -1,0 +1,92 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 30
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    // MultisDex
+    implementation "androidx.multidex:multidex:${Versions.multidex}"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}"
+
+    // AndroidX
+    implementation "androidx.core:core-ktx:${Versions.core_ktx}"
+    implementation "androidx.appcompat:appcompat:${Versions.appcompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
+    implementation "androidx.activity:activity-ktx:${Versions.activity}"
+    implementation "androidx.fragment:fragment-ktx:${Versions.fragment}"
+
+    // Google
+    implementation "com.google.dagger:hilt-android:${Versions.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${Versions.hilt}"
+
+    // Material
+    implementation "com.google.android.material:material:${Versions.material_theme}"
+
+    // Unit Testing
+    testImplementation "org.mockito:mockito-core:${Versions.mockito}"
+    testImplementation "org.mockito:mockito-inline:${Versions.mockito}"
+    testImplementation("org.mockito.kotlin:mockito-kotlin:${Versions.mockito_kotlin}") {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    }
+    testImplementation "org.hamcrest:hamcrest:${Versions.hamcrest}"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutine}"
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:${Versions.mock_web_server}")
+    testImplementation "org.robolectric:robolectric:${Versions.roboelectric}"
+    kaptTest("com.google.dagger:hilt-android-compiler:${Versions.hilt_android_compiler}")
+    testImplementation("com.google.dagger:hilt-android-testing:${Versions.hilt_android_compiler}")
+    testImplementation "io.mockk:mockk:${Versions.mockk}"
+
+    // UI Testing
+    testImplementation "junit:junit:${Versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${Versions.junit_ext}"
+    testImplementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${Versions.espresso_core}"
+    implementation "androidx.test.espresso:espresso-idling-resource:${Versions.espresso_core}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${Versions.espresso_core}"
+    androidTestImplementation "androidx.test:runner:${Versions.test_core}"
+    androidTestImplementation "androidx.test:rules:${Versions.test_core}"
+
+    // Utils
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation "io.github.thanosfisherman.mayi:mayi:${Versions.permissions}"
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'io.github.florent37:shapeofview:1.4.7'
+    implementation 'com.github.takusemba:spotlight:2.0.5'
+}

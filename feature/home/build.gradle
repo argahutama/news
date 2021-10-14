@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.library'
+}
+
+apply from: '../../android_common.gradle'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    correctErrorTypes = true
+}
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    implementation project(Modules.common)
+    implementation project(Modules.model)
+    implementation project(Modules.repository)
+
+    implementation "com.google.android.play:core:${Versions.play_core}"
+}
