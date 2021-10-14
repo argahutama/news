@@ -16,7 +16,7 @@ import timber.log.Timber
 import java.io.Serializable
 
 @HiltAndroidApp
-class AwesomeApp : BaseApp() {
+class NewsApp : BaseApp() {
     private val alarmManager by lazy { getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreate() {
