@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<HomeViewState>() {
-    private val photoListAdapter by lazy { PhotoListAdapter(viewModel.photos) }
-    private val photoGridAdapter by lazy { PhotoGridAdapter(viewModel.photos) }
+    private val photoListAdapter by lazy { PhotoListAdapter(viewModel.articles) }
+    private val photoGridAdapter by lazy { PhotoGridAdapter(viewModel.articles) }
     private var backPressed = false
     private var backPressJob: Job? = null
     override val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
@@ -63,13 +63,13 @@ class HomeActivity : BaseActivity<HomeViewState>() {
     private fun onMorePhotosFetched() {
         photoListAdapter.run {
             loadMoreModule.loadMoreComplete()
-            setList(viewModel.photos)
+            setList(viewModel.articles)
         }
         photoGridAdapter.run {
             loadMoreModule.loadMoreComplete()
-            setList(viewModel.photos)
+            setList(viewModel.articles)
         }
-        toggleLoadMore(true)
+        toggleLoadMore(viewModel.shouldLoadMore)
     }
 
     private fun onMorePhotosFailed() {
@@ -97,7 +97,7 @@ class HomeActivity : BaseActivity<HomeViewState>() {
     private fun RecyclerView.setListView() {
         adapter = photoListAdapter.apply {
             setOnItemClickListener { _, _, position ->
-                navigateToDetail(viewModel.photos[position])
+                navigateToDetail(viewModel.articles[position])
             }
         }
         layoutManager = LinearLayoutManager(
@@ -114,7 +114,7 @@ class HomeActivity : BaseActivity<HomeViewState>() {
     private fun RecyclerView.setGridView() {
         adapter = photoGridAdapter.apply {
             setOnItemClickListener { _, _, position ->
-                navigateToDetail(viewModel.photos[position])
+                navigateToDetail(viewModel.articles[position])
             }
         }
         layoutManager = GridLayoutManager(this@HomeActivity, 2)

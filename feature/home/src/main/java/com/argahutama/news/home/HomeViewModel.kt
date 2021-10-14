@@ -11,13 +11,18 @@ class HomeViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : BaseViewModel<HomeViewState>() {
     private var page: Int = 1
-    var photos = mutableListOf<Article>()
+    private var articleLoaded = 0
+    var articles = mutableListOf<Article>()
+        private set
+    var shouldLoadMore = false
         private set
 
     fun fetchInitialData() {
         launch({
             val newsResponse = newsRepository.getNews()
-            photos.addAll(newsResponse?.articles?.toMutableList().orEmpty())
+            articles.addAll(newsResponse?.articles?.toMutableList().orEmpty())
+            articleLoaded = newsResponse?.articles?.size ?: 0
+            shouldLoadMore = newsResponse?.totalResults ?: 0 > articleLoaded
             success(HomeViewState.InitialDataFetched)
         })
     }
@@ -25,7 +30,9 @@ class HomeViewModel @Inject constructor(
     fun fetchMorePhotos() {
         launch({
             val newsResponse = newsRepository.getNews(++page)
-            photos.addAll(newsResponse?.articles?.toMutableList().orEmpty())
+            articles.addAll(newsResponse?.articles?.toMutableList().orEmpty())
+            articleLoaded += newsResponse?.articles?.size ?: 0
+            shouldLoadMore = newsResponse?.totalResults ?: 0 > articleLoaded
             success(HomeViewState.MoreNewsFetched)
         }, false) {
             page--

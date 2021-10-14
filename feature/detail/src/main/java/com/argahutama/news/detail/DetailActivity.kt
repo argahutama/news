@@ -20,7 +20,7 @@ class DetailActivity : BaseActivity<DetailViewState>() {
     }
 
     private fun initView() = with(binding) {
-        tvToolbarTitle.text = viewModel.article?.title.orEmpty()
+        tvToolbarTitle.text = viewModel.article?.source?.name.orEmpty()
         Glide.with(this@DetailActivity)
             .load(viewModel.article?.urlToImage.orEmpty())
             .into(ivLandscapePoster)
