@@ -7,7 +7,7 @@
             android:name="com.argahutama.news.home.HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AwesomeApp.NoActionBar" />
+            android:theme="@style/Theme.NewsApp.NoActionBar" />
     </application>
 
 </manifest>

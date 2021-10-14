@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/ivPhoto"
         app:layout_constraintTop_toTopOf="@id/ivPhoto"
-        tools:text="Awesome App" />
+        tools:text="News App" />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -46,6 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPhoto"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        tools:text="Awesome App" />
+        tools:text="News App" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

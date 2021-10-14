@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:theme="@style/Theme.AwesomeApp.NoActionBar">
+            android:theme="@style/Theme.NewsApp.NoActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapseToolbar"
@@ -47,9 +47,9 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:theme="@style/Theme.AwesomeApp"
+                    android:theme="@style/Theme.NewsApp"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Theme.AwesomeApp.NoActionBar">
+                    app:popupTheme="@style/Theme.NewsApp.NoActionBar">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"

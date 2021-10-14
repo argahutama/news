@@ -9,7 +9,7 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.AwesomeApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.NewsApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black_900</item>
         <item name="colorPrimaryVariant">@color/purple_500</item>
@@ -23,7 +23,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.AwesomeApp.NoActionBar">
+    <style name="Theme.NewsApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
