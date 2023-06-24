@@ -13,6 +13,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson}"
     implementation "com.squareup.okhttp3:logging-interceptor:${Versions.okthttp_logging}"
 
-    debugImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
-    releaseImplementation "com.ashokvarma.android:gander-no-op:${Versions.gander}"
+    debugImplementation "com.mocklets:pluto:${Versions.pluto}"
+    releaseImplementation "com.mocklets:pluto-no-op:${Versions.pluto}"
 }

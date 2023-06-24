@@ -1,14 +1,12 @@
 package com.argahutama.news.remote.di
 
-import android.content.Context
 import com.argahutama.news.remote.api.NewsApi
 import com.argahutama.news.remote.interceptor.AcceptLanguageInterceptor
-import com.ashokvarma.gander.GanderInterceptor
 import com.google.gson.Gson
+import com.mocklets.pluto.PlutoInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -40,13 +38,12 @@ object RemoteModule {
     fun provideAcceptLanguageInterceptor() = AcceptLanguageInterceptor()
 
     @Provides
-    fun provideGanderInterceptor(@ApplicationContext context: Context) =
-        GanderInterceptor(context).showNotification(true)
+    fun providePlutoInterceptor() = PlutoInterceptor()
 
     @Provides
     fun provideOkHttpClient(
         acceptLanguageInterceptor: AcceptLanguageInterceptor,
-        ganderInterceptor: GanderInterceptor,
+        plutoInterceptor: PlutoInterceptor,
         @IsDebug isDebug: Boolean,
     ): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
@@ -54,7 +51,7 @@ object RemoteModule {
             .connectTimeout(45, TimeUnit.SECONDS)
             .writeTimeout(45, TimeUnit.SECONDS)
             .readTimeout(45, TimeUnit.SECONDS)
-        if (isDebug) builder.addInterceptor(ganderInterceptor)
+        if (isDebug) builder.addInterceptor(plutoInterceptor)
         return builder
     }
 
@@ -65,7 +62,7 @@ object RemoteModule {
         gson: Gson,
         builder: OkHttpClient.Builder,
         @BaseUrl baseUrl: String
-    ) = Retrofit.Builder()
+    ): Retrofit = Retrofit.Builder()
         .client(builder.build())
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create(gson))
@@ -73,5 +70,7 @@ object RemoteModule {
 
     @Provides
     @Singleton
-    fun providePhotoApi(@DefaultAuth retrofit: Retrofit) = retrofit.create(NewsApi::class.java)
+    fun providePhotoApi(
+        @DefaultAuth retrofit: Retrofit
+    ): NewsApi = retrofit.create(NewsApi::class.java)
 }

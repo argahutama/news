@@ -10,13 +10,13 @@ hilt {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.argahutama.newsapp"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 5
         versionName "1.0.0"
 
@@ -119,16 +119,15 @@ dependencies {
     // Feature Module
     implementation project(Modules.home)
 
-    implementation 'com.google.android.libraries.places:places:2.4.0'
+    implementation 'com.google.android.libraries.places:places:3.1.0'
     implementation project(path: ':common')
     implementation project(path: ':common')
     implementation project(path: ':feature:home')
     implementation project(path: ':feature:detail')
     implementation project(path: ':data:remote')
 
-    debugImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
-    debugMinifiedImplementation "com.ashokvarma.android:gander-imdb:${Versions.gander}"
-    releaseImplementation "com.ashokvarma.android:gander-no-op:${Versions.gander}"
+    debugImplementation "com.mocklets:pluto:${Versions.pluto}"
+    releaseImplementation "com.mocklets:pluto-no-op:${Versions.pluto}"
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

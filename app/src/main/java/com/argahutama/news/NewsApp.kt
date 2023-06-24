@@ -9,8 +9,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import com.argahutama.news.common.base.BaseApp
 import com.argahutama.news.common.navigation.NavigationDirection
-import com.ashokvarma.gander.Gander
-import com.ashokvarma.gander.imdb.GanderIMDB
+import com.mocklets.pluto.Pluto
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import java.io.Serializable
@@ -21,7 +20,8 @@ class NewsApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
-        Gander.setGanderStorage(GanderIMDB.getInstance())
+
+        Pluto.initialize(this, shouldShowIntroToast = false)
 
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         else Timber.plant(object : Timber.Tree() {
@@ -35,7 +35,7 @@ class NewsApp : BaseApp() {
             direction.extras.forEach { putExtra(it) }
         }
         val pendingIntent = PendingIntent.getBroadcast(
-            this, 0, alarmIntent, 0
+            this, 0, alarmIntent, PendingIntent.FLAG_MUTABLE
         )
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
     }
